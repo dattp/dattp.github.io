@@ -1,10 +1,10 @@
 # --- General options --- #
 
 # Name of website
-title: DatTP
+title: Cotato
 
 # Short description of your site
-description: learn! not study
+description: learn not study
 
 # --- Local development options ---
 # If your website is hosted locally rather than on GitHub, then you need to uncomment the next two parameters to set the url and baseurl
