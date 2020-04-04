@@ -1,7 +1,9 @@
 ---
 layout: post
-title: Xin chào tất cả mọi người!
+title: null trong js
+subtitle: Tìm hiểu null trong js nó là cái gì. null và undefined
 published: true
+tags: [nodejs, js, 'null', undefined]
 ---
 
 
