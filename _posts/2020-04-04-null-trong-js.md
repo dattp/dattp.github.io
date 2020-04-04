@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title:  "null trong JS"
