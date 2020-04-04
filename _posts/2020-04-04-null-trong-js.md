@@ -15,7 +15,6 @@ tags: [nodejs, js, 'null', undefined]
 
 Vào một ngày đẹp trời mình log typeof null nó ra object &#128517; . Toát mồ hôi, và mình đi tìm hiểu xem tại sao nó lại là object nhỉ.
 
-### Code block
 ``` js
 console.log(typeof null)
 >object
