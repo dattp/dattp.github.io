@@ -1,6 +1,6 @@
 ---
 layout: post
-title: null trong js
+title: null trong js và undefined
 subtitle: Tìm hiểu null trong js nó là cái gì. null và undefined
 published: true
 tags: [nodejs, js, 'null', undefined]
@@ -13,10 +13,7 @@ tags: [nodejs, js, 'null', undefined]
 
 ----------
 
-
-> Markdown is a plain text formatting syntax designed to be converted to HTML. Markdown is popularly used as format for readme files, ... or in text editors for the quick creation of rich text documents.  - [Wikipedia](http://en.wikipedia.org/wiki/Markdown)
-
-As showed in this manual, it uses hash(#) to identify headings, emphasizes some text to be **bold** or *italic*. You can insert a [link](http://www.example.com) , or a footnote[^demo]. Serveral advanced syntax are listed below, please press `Ctrl + /` to view Markdown cheatsheet.
+Vào một ngày đẹp trời mình log typeof null nó ra object &#128517; . Toát mồ hôi, và mình đi tìm hiểu xem tại sao nó lại là object nhỉ.
 
 ### Code block
 ``` python
