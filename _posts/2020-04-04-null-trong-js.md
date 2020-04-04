@@ -4,6 +4,7 @@ title: Xin chào tất cả mọi người!
 published: true
 ---
 
+
 # null trong js và undefined
 
 |JS|null|undefined|
