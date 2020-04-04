@@ -5,7 +5,7 @@ subtitle: "tại sao lại đi tìm hiểu null làm gì &#128518;"
 date:   2020-04-04
 categories: [JS]
 comments: true
-tags: [undefined, JS, null]
+tags: [undefined, JS, 'null']
 bigimg: "/assets/img/blogging/jekyll/jekyllhomepage.png"
 ---
 
