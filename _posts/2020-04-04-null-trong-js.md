@@ -18,7 +18,7 @@ Vào một ngày đẹp trời mình log typeof null nó ra object &#128517; . T
 ### Code block
 ``` js
 console.log(typeof null)
-object
+>object
 ```
 
 #### Flow charts
