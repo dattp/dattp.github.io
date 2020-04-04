@@ -18,6 +18,9 @@ Vào một ngày đẹp trời mình log typeof null nó ra object &#128517; . T
 ``` js
 console.log(typeof null)
 >object
+
+console.log(typeof undefined)
+>undefined
 ```
 
 #### Flow charts
