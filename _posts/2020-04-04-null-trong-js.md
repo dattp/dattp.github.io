@@ -1,12 +1,3 @@
----
-layout: post
-title: null trong js và undefined
-subtitle: Tìm hiểu null trong js nó là cái gì. null và undefined
-published: true
-tags: [nodejs, js, 'null', undefined]
----
-
-
 # null trong js và undefined
 
 |JS|null|undefined|
@@ -22,101 +13,94 @@ console.log(typeof null)
 console.log(typeof undefined)
 >undefined
 ```
-
-#### Flow charts
-```flow
-st=>start: Start
-e=>end
-op=>operation: My Operation
-cond=>condition: Yes or No?
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
+#### 1. null là gì?
+hmz!,  vậy ```null``` là gì? Theo như mình hiểu thì nó là  một giá trị rỗng, những vẫn sẽ phải khởi tạo và gán giá trị.
+``` js
+const a = null
+console.log(a)
+> null
+console.log(typeof a)
+> object
 ```
-#### Sequence diagrams 
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
+Như vậy, nó vẫn được coi là một giá trị, vậy JS đã lưu nó như nào?
+#### 2. Cách js lưu giá trị.
+Theo như những gì mình biết. Trong js có 6 giá trị được coi là ```falsy``` và 5 kiểu  ```primitive``` - kiểu dữ liệu nguyên thuỷ.
 ```
+# 6 falsy
+>false
+>null
+>undefined
+>0
+>''
+>NaN
 
-> **Note:** You can find more information:
+# 6 primitive
+>booleand
+>null
+>undefined
+>number
+>string
+```
+Cả null và undefined đều khá đặc biệt trong js. Để phân biệt các kiểu dữ liệu ```primitive``` khi lưu giá trị của biến sẽ được phân biệt bởi một ``tag``
+Mã nguồn của js được xây dựng dựa trên ```C```. Do vậy việc định danh sẽ do thư viện được viết bằng ```C``` đảm nhiệm. Cùng đi sâu vào châm cứu nào.
 
-> - about **Sequence diagrams** syntax [here][3],
-> - about **Flow charts** syntax [here][4].
+Mỗi giá trị của biến sẽ được lưu bởi  32 bit, trong đó sẽ dành ra 1-3 bit đầu tiên dùng để làm ```tag``` được phân biệt như sau:
+* 000: object
+* 1xx: int
+* 010: double
+* 100: string
+* 110: boolean
 
-### Checkbox
-You can use `- [ ]` and `- [x]` to create checkboxes, for example:
+**  đây là đoạn mã check type trong ```C``` **
+```
+JS_PUBLIC_API(JSType)
+JS_TypeOfValue(JSContext *cx, jsval v)
+{
+    JSType type = JSTYPE_VOID;
+    JSObject *obj;
+    JSObjectOps *ops;
+    JSClass *clasp;
 
-- [x] Item1
-- [ ] Item2
-- [ ] Item3
+    CHECK_REQUEST(cx);
+    if (JSVAL_IS_VOID(v)) {
+	type = JSTYPE_VOID;
+    } else if (JSVAL_IS_OBJECT(v)) {                (1)
+	obj = JSVAL_TO_OBJECT(v);
+	if (obj &&
+	    (ops = obj->map->ops,
+	     ops == &js_ObjectOps
+	     ? (clasp = OBJ_GET_CLASS(cx, obj),
+		clasp->call || clasp == &js_FunctionClass)
+	     : ops->call != 0)) {
+	    type = JSTYPE_FUNCTION;
+	} else {
+	    type = JSTYPE_OBJECT;                       (2)
+	}
+    } else if (JSVAL_IS_NUMBER(v)) {
+	type = JSTYPE_NUMBER;
+    } else if (JSVAL_IS_STRING(v)) {
+	type = JSTYPE_STRING;
+    } else if (JSVAL_IS_BOOLEAN(v)) {
+	type = JSTYPE_BOOLEAN;
+    }
+    return type;
+}
+```
+Hơi khó hiểu tí nhỉ, mình cũng không hiểu gì đâu &#128514;. Nhưng hãy để ý  có các kiểu dữ liệu được định nghĩa sẵn như: ```JSVAL_IS_VOID, JSVAL_TO_OBJECT, JSVAL_IS_NUMBER, JSVAL_IS_STRING, JSVAL_IS_BOOLEAN``` 
+Mình không đi sâu, nhưng cũng mạnh dạn dự đoán dựa vào bit của ```tag``` để khai báo cấu trúc kiểu ```enum``` cho các dữ liệu đó.
 
-> **Note:** Currently it is only partially supported. You can't toggle checkboxes in Evernote. You can only modify the Markdown in Marxico to do that. Next version will fix this.  
+####  3 . Vậy tạo sao null lại là object
+Dựa vào đoạn code (1) và (2) trong ```C``` ở trên , ta có thể  nhận định ```null``` đã được lưu với ```tag``` là 3 bit 000 ở đầu. Rõ ràng ```NULL``` trong ```C``` ** tương đương với 0 tức là nó trỏ về 0 - vùng địa chỉ không có ý nghĩa.**
+Hiển nhiên khi check điền kiện ```if (JSVAL_IS_OBJECT(null)``` sẽ  có giá trị ```true``` và vì nó không phải là ```function``` nên giá trị trả về sẽ là ```type = JSTYPE_OBJECT;``` => đúng object đây rồi &#128514;,
 
+#### 4. Kết luận gì ở đây?
+Vậy tại sao lại không định nghĩa ra một kiểu dữ liệu cho ```null``` như ```undefined``` nhỉ. Chỉ cần định nghĩa thêm 1 loại ```JSVAL_IS_NULL``` chẳng hạn &#128518;.
+Có lẽ ngay từ bạn đầu JS ra đời, cha đẻ của nó **Crockford** nên làm như vậy, nhưng có thể đến lúc phát hiện ra điều này, thì đã có quá nhiều người sử dụng, các hàm sinh ra cũng đã check ```null``` theo object nên việc sửa lại là điều khá khó khăn. Chính **Crockford** đã chỉ ra: 
+>I think it is too late to fix typeof. The change proposed for typeof null will break existing code.
 
-### Dancing with Evernote
-
-#### Notebook & Tags
-**Marxico** add `@(Notebook)[tag1|tag2|tag3]` syntax to select notebook and set tags for the note. After typing `@(`, the notebook list would appear, please select one from it.  
-
-#### Title
-**Marxico** would adopt the first heading encountered as the note title. For example, in this manual the first line `Welcome to Marxico` is the title.
-
-#### Quick Editing
-Note saved by **Marxico** in Evernote would have a red ribbon button on the top-right corner. Click it and it would bring you back to **Marxico** to edit the note. 
-
-> **Note:** Currently **Marxico** is unable to detect and merge any modifications in Evernote by user. Please go back to **Marxico** to edit.
-
-#### Data Synchronization
-While saving rich HTML content in Evernote, **Marxico** puts the Markdown text in a hidden area of the note, which makes it possible to get the original text in **Marxico** and edit it again. This is a really brilliant design because:
-
-- it is beyond just one-way exporting HTML which other services do;
-- and it avoids privacy and security problems caused by storing content in a intermediate server. 
-
-> **Privacy Statement: All of your notes data are saved in Evernote. Marxico doesn't save any of them.** 
-
-#### Offline Storage
-**Marxico** stores your unsynchronized content locally in browser storage, so no worries about network and broswer crash. It also keeps the recent file list you've edited in `Document Management(Ctrl + O)`.
-
-> **Note:** Although browser storage is reliable in the most time, Evernote is born to do that. So please sync the document regularly while writing.
-
-## Shortcuts
-Help    `Ctrl + /`
-Sync Doc    `Ctrl + S`
-Create Doc    `Ctrl + Alt + N`
-Maximize Editor    `Ctrl + Enter`
-Preview Doc `Ctrl + Alt + Enter`
-Doc Management    `Ctrl + O`
-Menu    `Ctrl + M`
-
-Bold    `Ctrl + B`
-Insert Image    `Ctrl + G`
-Insert Link    `Ctrl + L`
-Convert Heading    `Ctrl + H`
-
-## About Pro
-**Marixo** offers a free trial of 10 days. After that, you need to [purchase](http://marxi.co/purchase.html) the Pro service. Otherwise, you would not be able to sync new notes. Previous notes can be edited and synced all the time.
-
-## Credits
-**Marxico** was first built upon [Dillinger][5], and the newest version is almost based on the awesome [StackEdit][6]. Acknowledgments to them and other incredible open source projects!
-
-## Feedback & Bug Report
-- Twitter: [@gock2][7]
-- Email: <hustgock@gmail.com>
+#### 5. Tài liệu tham khảo
+* [The history of “typeof null”](https://2ality.com/2013/10/typeof-null.html)
+* [Source code js](https://dxr.mozilla.org/classic/source/js/src/jsapi.c#333)
 
 ----------
-Thank you for reading this manual. Now please press `Ctrl + M` and click `Link with Evernote`. Enjoy your **Marxico** journey!
-
-
-[^demo]: This is a demo footnote. Read the [MultiMarkdown Syntax Guide](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide#footnotes) to learn more. Note that Evernote disables ID attributes in its notes , so `footnote` and `TOC` are not actually working. 
-
-  [1]: http://marxi.co/client_en
-  [2]: https://chrome.google.com/webstore/detail/kidnkfckhbdkfgbicccmdggmpgogehop
-  [3]: http://bramp.github.io/js-sequence-diagrams/
-  [4]: http://adrai.github.io/flowchart.js/
-  [5]: http://dillinger.io
-  [6]: http://stackedit.io
-  [7]: https://twitter.com/gock2
-
+ Chia sẻ là cách ghi nhớ tốt nhất! Cảm ơn tất cả mọi người!
