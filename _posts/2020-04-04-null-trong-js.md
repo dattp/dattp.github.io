@@ -1,3 +1,11 @@
+---
+layout: post
+title: null trong js
+subtitle: Tìm hiểu null trong js nó là cái gì.
+published: true
+tags: [nodejs, js, 'null', undefined]
+---
+
 # null trong js
 
 |JS|null|undefined|
