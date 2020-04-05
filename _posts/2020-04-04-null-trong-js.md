@@ -59,6 +59,11 @@ Mỗi giá trị của biến sẽ được lưu bởi  32 bit, trong đó sẽ 
 * 100: string
 * 110: boolean
 
+| 3 bits tag | bits values      |
+|------------|------------------|
+| 000        | (29 bits values) |
+
+
 **  đây là đoạn mã check type trong ```C``` **
 ```
 JS_PUBLIC_API(JSType)
