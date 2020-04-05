@@ -52,7 +52,7 @@ Theo như những gì mình biết. Trong js có 6 giá trị được coi là `
 Cả null và undefined đều khá đặc biệt trong js. Để phân biệt các kiểu dữ liệu ```primitive``` khi lưu giá trị của biến sẽ được phân biệt bởi một ``tag``
 Mã nguồn của js được xây dựng dựa trên ```C```. Do vậy việc định danh sẽ do thư viện được viết bằng ```C``` đảm nhiệm. Cùng đi sâu vào châm cứu nào.
 
-Mỗi giá trị của biến sẽ được lưu bởi  32 bit, trong đó sẽ dành ra 1-3 bit đầu tiên dùng để làm ```tag``` được phân biệt như sau:
+Mỗi giá trị của biến sẽ được lưu bởi  32 bit, trong đó sẽ dành ra 1-3 bit(s) đầu tiên dùng để làm ```tag``` được phân biệt như sau:
 * 000: object
 * 1xx: int
 * 010: double
