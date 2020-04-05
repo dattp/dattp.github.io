@@ -1,4 +1,4 @@
-# null trong js và undefined
+# null trong js
 
 |JS|null|undefined|
 
