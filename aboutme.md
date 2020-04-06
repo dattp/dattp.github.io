@@ -1,16 +1,10 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
+subtitle: hmz
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+Xin chào! Mình là Đạt hoặc là ĐạtPT, mình thích nickname Cotato.
+Mọi thông tin của mình đều có ở link icon ở dưới trang web.
 
-- I rock a great mustache
-- I'm extremely loyal to my family
-
-What else do you need?
-
-### my history
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](http://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+Hết! &#128526;

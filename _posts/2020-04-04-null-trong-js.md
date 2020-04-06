@@ -106,6 +106,14 @@ Mình không đi sâu, nhưng cũng mạnh dạn dự đoán dựa vào bit củ
 Dựa vào đoạn code (1) và (2) trong ```C``` ở trên , ta có thể  nhận định ```null``` đã được lưu với ```tag``` là 3 bit 000 ở đầu. Rõ ràng ```NULL``` trong ```C``` ** tương đương với 0 tức là nó trỏ về 0 - vùng địa chỉ không có ý nghĩa.**
 Hiển nhiên khi check điền kiện ```if (JSVAL_IS_OBJECT(null)``` sẽ  có giá trị ```true``` và vì nó không phải là ```function``` nên giá trị trả về sẽ là ```type = JSTYPE_OBJECT;``` => đúng object đây rồi &#128514;,
 
+Hãy nhìn sang Java nào? Rõ ràng việc khai báo biến trong Java rất chặt chẽ. Không như trong JS, Java đòi hỏi phải chỉ ra kiểu dữ liệu rõ ràng.
+Giá trị null trong java có thể khai báo với kiểu dữ liêu là `string` hoặc khởi tạo constructor từ class. 
+```java
+	string a = null
+	Student student = null // Student
+```
+Rõ ràng của `string` và `student` đều là object và có thể gán = `null`
+
 ### 4. Kết luận gì ở đây?
 Vậy tại sao lại không định nghĩa ra một kiểu dữ liệu cho ```null``` như ```undefined``` nhỉ. Chỉ cần định nghĩa thêm 1 loại ```JSVAL_IS_NULL``` chẳng hạn &#128518;.
 Có lẽ ngay từ bạn đầu JS ra đời, cha đẻ của nó **Crockford** nên làm như vậy, nhưng có thể đến lúc phát hiện ra điều này, thì đã có quá nhiều người sử dụng, các hàm sinh ra cũng đã check ```null``` theo object nên việc sửa lại là điều khá khó khăn. Chính **Crockford** đã chỉ ra: 
