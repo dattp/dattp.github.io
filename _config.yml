@@ -118,7 +118,7 @@ url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
 # disqus: ""
 
 # To use Facebook Comments, fill in a Facebook App ID
- fb_comment_id: "3352484824859550"
+# fb_comment_id: "3352484824859550"
 
 # To use Staticman comments, fill in repository, branch, and endpoint
 staticman:
@@ -254,6 +254,7 @@ prose:
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189
