@@ -3,6 +3,7 @@ layout: post
 title: typescript đầu tiên
 subtitle: Mình đã bắt đầu code typescript như nào?
 published: true
+bigimg: /img/path.jpg
 tags: [nodejs, ts, typescript]
 ---
 
