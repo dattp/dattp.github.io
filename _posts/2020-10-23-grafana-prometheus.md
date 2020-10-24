@@ -3,7 +3,6 @@ layout: post
 title: Thử Grafana + Prometheus cho NodeJS
 subtitle: Monitor đơn giản ứng dụng NodeJS với Grafana và Prometheus
 published: true
-bigimg: /img/grafana+prometheus-pic5.png
 tags: [nodejs, Grafana, Prometheus]
 ---
 
@@ -12,6 +11,8 @@ tags: [nodejs, Grafana, Prometheus]
 ----------
 
 > Đối với mình việc monitor hệ thống rất quan trọng. Nó là những thông tin để developer theo dõi được tình hình của hệ thống. Kiếm soát được khi nào hệ thống bị quá tải, các chỉ số của các request đến server.
+
+![Kết quả](/img/grafana+prometheus-pic5.png "Kết quả")
 
 ### 1. Đơn giản để dễ triển khai.
 * Mình chọn grafana + prometheus. Và để đơn giản hơn nữa mình sẽ setup luôn bằng Docker.
