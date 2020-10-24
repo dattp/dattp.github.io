@@ -3,6 +3,7 @@ layout: post
 title: Thử Grafana + Prometheus cho NodeJS
 subtitle: Monitor đơn giản ứng dụng NodeJS với Grafana và Prometheus
 published: true
+bigimg: /img/grafana+prometheus-pic5.png
 tags: [nodejs, Grafana, Prometheus]
 ---
 
