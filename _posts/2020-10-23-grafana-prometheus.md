@@ -12,8 +12,6 @@ tags: [nodejs, Grafana, Prometheus]
 
 > Đối với mình việc monitor hệ thống rất quan trọng. Nó là những thông tin để developer theo dõi được tình hình của hệ thống. Kiếm soát được khi nào hệ thống bị quá tải, các chỉ số của các request đến server.
 
-![Kết quả](/img/grafana+prometheus-pic5.png "Kết quả")
-
 ### 1. Đơn giản để dễ triển khai.
 * Mình chọn grafana + prometheus. Và để đơn giản hơn nữa mình sẽ setup luôn bằng Docker.
 * Vì dự án mình đang làm đã live, và đang quản lý bằng PM2 nên chưa thể chạy application bằng docker như những bài hướng dẫn khác.
