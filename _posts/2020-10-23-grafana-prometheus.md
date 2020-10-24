@@ -129,7 +129,7 @@ scrape_configs:
 * Bấm `Save & Test` và xuất hiện `Data source is working` là thành công rồi nha.
 * Quay lại trang chủ và chọn `Create your first dashboard` để tự tạo graph.
 * Bạn có thể import những dashboard có sẵn tại đây: [dashboard grafana nodejs](https://grafana.com/grafana/dashboards?search=nodejs)
-* Mình có kết hợp với dashboard có sẵn và bổ sung thêm thông tin về response. Dữ liệu mình để trong file `NodeJSApplicationDashboard.json`. Có thể import bằng file json nhớ.
+* Mình có kết hợp với dashboard có sẵn và bổ sung thêm thông tin về response. Dữ liệu mình để trong file [NodeJSApplicationDashboard.json](https://github.com/dattp/todo_typescript/blob/monitor/monitor/NodeJSApplicationDashboard.json). Có thể import bằng file json nhớ.
 * Chúng ta sẽ có 1 dashboard nhìn ngon hơn.
 * Bây giờ sẽ xử dụng ab hoặc wrk để bắn thử request đến server rồi xem các thống số hiện thị trên board nhé.
 `wrk -t1 -c10 -d60s http://localhost:9007/api/gettodos`
