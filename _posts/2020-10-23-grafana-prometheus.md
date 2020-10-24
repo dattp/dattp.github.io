@@ -43,7 +43,7 @@ tags: [nodejs, Grafana, Prometheus]
     this._setMonitor()
     this._loadRoute()
   }
-//lưu ý là phải để this._setMonitor() trên _loadRoute()
+//lưu ý là phải để _setMonitor() trên _loadRoute()
 ```
 * Bây giờ hãy restart lại server và truy cập vào: <http://localhost:9007/metrics> chúng ta sẽ xuất hiện trang:
 ![Thông số của server](/img/grafana+prometheus-pic1.png "Thông số server")
