@@ -88,9 +88,9 @@ return module.exports;
 #### 2.2 Vấn đề là bị làm sao và circular là như nào?
 
 - Như vậy bản chất khi 1 file `.js` được thực thi nó sẽ return 1 đối tượng là `module.exports;`
-- Quay lại với ví dụ được nêu ra ở phần 1 chúng ta thấy 1 đặc điểm chung ở 2 file `a.js` và `b.js` đó là đều trỏ `module.exports` vào 1 object mới, không còn là địa chỉ default.
+- Quay lại với ví dụ được nêu ra ở phần 1 chúng ta thấy 1 đặc điểm chung ở 2 file `a.js` và `b.js` đó là đều trỏ `module.exports` vào 1 object mới `module.exports = {obj mới}`, không còn là địa chỉ default.
 - Khi đoạn code trong `index.js` được thực thi, file `a.js` được require nên sẽ được gọi, trong file `a.js` lại require `b.js`. Lúc này code trong `a.js` chưa được thực thi xong nhưng mặc định đã có `module.exports` được sinh ra ngay từ đầu.
-- Trong file `b.js` lại require lại `a.js`. `a.js` đã được require trước đó bởi `index.js` nên `const a = require('./a')` trong `b` sẽ trỏ cùng về 1 địa chỉ mà không thực thi lại những đoạn code trong file `a`.
+- Trong file `b.js` lại require lại `a.js`. `a.js` đã được require trước đó bởi `index.js` nên đoạn code trong `a` sẽ không cần được gọi lại. `const a = require('./a')` trong `b` sẽ trỏ vào địa chỉ `module.exports` mặc định của `a`.
 - Sau khi code trong `b` được thực thi xong thì code trong file `a` mới được thực thi phần còn lại. Nhưng kết thúc file `a` ta lại gán `module.exports= một object mới`, cái mà trước đó trong `b` ghi nhận 1 địa chỉ default của `a` 😓.
 - Việc require chéo nhau được gọi là `circular`. Do vậy khi đoạn code `console.log(a.getModuleB())` trong `index` được thực thi ta gọi đến hàm trong `a`, từ `a` gọi qua hàm của `b`, từ `b` lại gọi qua hàm của `a`, nhưng lúc `b` gọi hàm của `a` do `module.exports` của a đã bị thay đổi giá trị default nên trong `b` sẽ không có những hàm đó => `TypeError: a.getModuleA is not a function` là ở đây.
 
@@ -127,5 +127,5 @@ exports.getModuleA = getModuleA
 
 #### Tham khảo:
 
-https://nodejs.org/api/modules.html#cycles
-https://nodejs.org/api/modules.html#moduleexports
+- [cycles](https://nodejs.org/api/modules.html#cycles)
+- [moduleexports](https://nodejs.org/api/modules.html#moduleexports)
