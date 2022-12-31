@@ -104,13 +104,14 @@ db.getCollection(collection_name).find({_id:{$gt:ObjectId('63b024c40000000000000
 	
 	while (cursor <= idEnd) {
 	const  idFirstOfBatch  = cursor;
-	cursor +=  60  *  60  *  24;
+	cursor +=  60  *  60  *  24; // 24 hours
 	// add to worker with data body 
 		{
 			id_fist: idFirstOfBatch,
 			id_last: cursor,
 			...
 		}
+	// into worker - convert id to ObjectId
 }
 ```
 
