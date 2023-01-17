@@ -64,11 +64,11 @@ db.getCollection(collection_name).find(filter)
 
 * Ta thấy rằng, câu query trên vẫn phải đi scan qua cả `1000000` được skip để lấy ra 100 bản ghi tiếp theo đó. Khi số lượng `skip` tăng lên nhiều, sẽ gây chậm đến query.
 * Khi đó, nếu ra sử dụng `id` như 1 cursor như trường hợp trên thì kết quả sẽ tốt hơn rất nhiều.
+* Trong TH này thì việc phân trang bắt buộc phải lấy bản ghi lần lượng mà ko thể nhảy page, với cursor là id của item cuối cùng cả response trước đó.
 
 ```
 // query
 db.getCollection(collection_name).find({_id:{$gt:ObjectId('63b024c40000000000000000')}})
-				.skip(1000000)
 				.limit(100)
 				.sort({_id: -1})
 				.explain('executionStats')
