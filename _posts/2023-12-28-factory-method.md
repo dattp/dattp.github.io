@@ -36,9 +36,24 @@ if (cityCode === 'DN') {
 // khởi tạo axios để call API
 // xử lý request failed để re-try
 ```
-* Nếu như ở mỗi logic khác cần lấy thông tin về `City` sẽ phải dùng nguyên đoạn code trên.
-* Vì không muốn ở logic sẽ phải quan tâm đến việc khởi tạo và gọi API lấy thông tin `City` như nào và với yêu cầu sau này có thể thêm nhiều thành phố nữa, thì đoạn code trên chắc chắn phình to hơn. Chưa kể là có thể bổ sung thêm những business khác.
-* Vì thế mình cần tìm một phương pháp để có thể xử lý được với trường hợp như này. Vì đây là vấn đề khởi tạo object, contructor nên mình nghĩ ngay đến `factory method` thuộc nhóm creational.
+
+* Issue xảy ra khi ở các code logic cần lấy data về `City` thì phải viết lại đoạn code trên. Hoặc nếu clean hơn thì sẽ viết 1 hàm riêng để xử lý việc lấy data:
+
+```ts
+function getInfoCityByCode(cityCode: string): Promise<ICity> {
+    let domain = ''
+    let retryCount = 0
+    if (cityCode === 'DN') {
+        domain = DANANG_DOMAIN
+        retryCount = DANANG_RETRY
+    }
+    ...
+    // khởi tạo axios để call API
+    // xử lý request failed để re-try
+}
+```
+
+* Tuy nhiên với yêu cầu sau này có thể bổ sung thêm nhiều thành phố khác, và việc xử lý retry hoặc data các thành phố có thể khác nhau. Nên cách tiếp cận như trên vẫn chưa tối ưu và mình cần tìm một cách khác để có thể xử lý được với trường hợp như này. Vì đây là vấn đề khởi tạo object, constructor nên mình nghĩ ngay đến `factory method` thuộc nhóm creational.
 
 ### 2. Thi triển factory method desing pattern
 
@@ -81,7 +96,7 @@ export class CityService {
 ```
 
 * Các class sẽ được tách ra thành các file riêng. Sau này khi code mở rộng thêm các thành phố khác chỉ cần clone ra và bổ sung thêm vào hàm `initCityRequest` là được.
-* Ở các logic code sẽ chỉ cần gọi đến hàm `getInfoCityByCode`
+* Ở các logic code sẽ chỉ cần gọi đến hàm `getInfoCityByCode` để lấy ra data.
 
 ### 3. Áp dụng với convention của project thực tế
 
