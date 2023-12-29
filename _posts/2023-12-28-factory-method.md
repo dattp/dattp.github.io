@@ -15,7 +15,8 @@ tags: [factory method,  design pattern, typescript]
 ---
   
 Về lý thuyết của factory method design pattern thì mình không nhắc lại. Ở đây, mình chỉ viết ra cách mình đã áp dụng factory method trong dự án mà mình đã thực hiện.
-### 1. Bài toán từ reqiurement và cách triển khai đơn giản
+
+### 1. Bài toán từ requirement và cách triển khai đơn giản
 
 Mình nhận được yêu cầu viết 1 module gọi api để lấy dữ liệu thông tin (gì đó) từ các thành phố khác nhau:
 
