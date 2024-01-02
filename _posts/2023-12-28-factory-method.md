@@ -56,7 +56,7 @@ function getInfoCityByCode(cityCode: string): Promise<ICity> {
 
 * Tuy nhiên với yêu cầu sau này có thể bổ sung thêm nhiều thành phố khác, và việc xử lý retry hoặc data các thành phố có thể khác nhau. Nên cách tiếp cận như trên vẫn chưa tối ưu và mình cần tìm một cách khác để có thể xử lý được với trường hợp như này. Vì đây là vấn đề khởi tạo object, constructor nên mình nghĩ ngay đến `factory method` thuộc nhóm creational.
 
-### 2. Thi triển factory method desing pattern
+### 2. Thi triển factory method design pattern
 
 * Đoạn code được mình viết lại
 
