@@ -64,7 +64,7 @@ db.getCollection(collection_name).find(filter)
 
 * Ta thấy rằng, câu query trên vẫn phải đi scan qua cả `1000000` được skip để lấy ra 100 bản ghi tiếp theo đó. Khi số lượng `skip` tăng lên nhiều, sẽ gây chậm đến query.
 * Khi đó, nếu ra sử dụng `id` như 1 cursor như trường hợp trên thì kết quả sẽ tốt hơn rất nhiều.
-* Trong TH này thì việc phân trang bắt buộc phải lấy bản ghi lần lượt mà ko thể nhảy page, với cursor là id của item cuối cùng cả response trước đó.
+* Trong TH này thì việc phân trang bắt buộc phải lấy bản ghi lần lượt mà ko thể nhảy page, với cursor là id của item cuối cùng của response trước đó.
 
 ```
 // query
@@ -89,7 +89,7 @@ db.getCollection(collection_name).find({_id:{$gt:ObjectId('63b024c40000000000000
 
 #### 2.3.  Sharding data.
 * Không phải là kỹ thuật sharding data khi lưu vào db. Mà là tận dụng việc id tự tăng để chia data xử lý trên nhiều worker khi cần scan số lượng bản ghi.
-* Ví dụ để gửi push notification cho toàn bộ vài  triệu user có trong hệ thống. Ta không thể nào query toàn bộ bảng user vì quá nặng. Hoặc nếu skip, limit để xử lý lần lượt thì quá lâu.
+* Ví dụ để push notification cho vài triệu user có trong hệ thống. Ta không thể nào query toàn bộ bảng user vì quá nặng. Hoặc nếu skip, limit để xử lý lần lượt thì quá lâu.
 * Lúc này ta sẽ chia việc query users theo batch. Nếu `id` trong mysql được đánh từ 1 đến 8.000.000 ta sẽ chia ra thành các cụm `id_start` và `id_end` cách nhau 500 đơn vị và đẩy vào từng worker để thực hiện query với công thức như sau:
 	* id_start = 1 & id_end = 500
 	* id_start = 501 & id_end = 1000
